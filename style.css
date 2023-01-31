@@ -39,7 +39,7 @@ button{
     color: white;
     padding: 8px 100px;
     margin: 16px 0;
-    
+    width: 95%;
 }
 #input-container{
     height: 80px;

@@ -220,7 +220,6 @@ function startGame(){
     console.log(word)
 
     for(let i=0;i<word.length;i++){
-        let wordNew=''
         let input=document.createElement('input')
         input.type='text'
         input.classList.add('input')
@@ -235,16 +234,37 @@ function startGame(){
                 guessNum-=1;
                 guessLeft.innerHTML=`Remaining Guesses: ${guessNum}`
                 if(guessNum==0){
-                    endGame()
+                    endGame(word)
                 }
                 
+                
+            }else{
+                checkWin(word)
                 
             }
         })
     }
 }
-function endGame(){
-    alert('all your chances are finished, try again')
+function endGame(word){
+    for(let i=0;i<word.length;i++){
+        let el=document.getElementsByName(word.charAt(i))[0]
+        el.removeEventListener('change',()=>{})
+        el.value=el.name
+    }
+    alert(`all your chances are finished correct word is: ${word}, try again`)
     startGame()
+}
+function checkWin(word){
+    
+    
+    let wordNew=''
+    for(let i=0;i<word.length;i++){
+        wordNew+=document.getElementsByName(word.charAt(i))[0].value
+    }
+    console.log(wordNew)
+    if(word===wordNew){
+        alert('congratulations you won!!!')
+        startGame()
+    }
 }
 startGame()
